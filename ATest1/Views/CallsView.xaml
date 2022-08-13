@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:sfavatar="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:Models="clr-namespace:ATest1.Models"
+             xmlns:VM="clr-namespace:ATest1.ViewModels"
+             x:Class="ATest1.Views.CallsView">
+
+    <ContentView.BindingContext>
+        <VM:CallsViewModel x:Name="ViewModel"/>
+    </ContentView.BindingContext>
+
+    <listView:SfListView ItemsSource="{x:Binding Contacts, Mode=OneWay}"
+                         ItemSpacing="0,2,0,0"
+                         ItemSize="68">
+        <listView:SfListView.ItemTemplate>
+            <!--Use x:DataType for every Binding to improve performance-->
+            <DataTemplate x:DataType="Models:ContactModel">
+                <Frame BackgroundColor="{AppThemeBinding Dark=#121212, Light=#f0f0f0}"
+                       Margin="8,0" 
+                       Padding="4">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <sfavatar:SfAvatarView AvatarName="{x:Binding FirstName}"
+                                               AvatarColorMode="DarkBackground"
+                                               InitialsType="DoubleCharacter"
+                                               ContentType="Initials"
+                                               HeightRequest="60"
+                                               CornerRadius="30"
+                                               WidthRequest="60"
+                                               Grid.Column="0"/>
+
+                        <StackLayout VerticalOptions="Center"
+                                     Grid.Column="1"
+                                     Margin="4,0">
+
+                            <Label Text="{x:Binding FirstName}"
+                                   FontAttributes="Bold"/>
+
+                            <Label Text="{x:Binding LastName}"/>
+
+                        </StackLayout>
+
+                    </Grid>
+                </Frame>
+            </DataTemplate>
+        </listView:SfListView.ItemTemplate>
+    </listView:SfListView>
+    
+</ContentView>
