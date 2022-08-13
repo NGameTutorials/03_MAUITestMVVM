@@ -9,19 +9,24 @@ namespace ATest1.ViewModels
     {
 
         public ObservableCollection<ContactModel> Contacts { get; } = new();
-
+        public Command LoadMoreCommand { get; set; }
         public CallsViewModel()
         {
-            new Thread(GenerateContacts).Start();
+            LoadMoreCommand = new(LoadMore);
+            //new Thread(GenerateContacts).Start();
+        }
+
+        void LoadMore()
+        {
+            GenerateContacts();
         }
 
         void GenerateContacts()
         {
-            var list = ContactListGenerator.GetContacts(40);
+            var list = ContactListGenerator.GetContacts(10);
             for (int i = 0; i < list.Count(); i++)
             {
                 Contacts.Add(list.ElementAtOrDefault(i));
-
             }
         }
     }

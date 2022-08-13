@@ -12,6 +12,10 @@
     </ContentView.BindingContext>
 
     <listView:SfListView ItemsSource="{x:Binding Contacts, Mode=OneWay}"
+                         LoadMoreCommand="{x:Binding LoadMoreCommand}"
+                         AutoFitMode="DynamicHeight"
+                         LoadMorePosition="End"
+                         LoadMoreOption="Auto"
                          ItemSpacing="0,2,0,0"
                          ItemSize="68">
         <listView:SfListView.ItemTemplate>
